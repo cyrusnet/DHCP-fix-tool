@@ -1,0 +1,21 @@
+# ==================================================
+# Title: Enterprise DHCP & Network Repair Utility
+# Author: cyrusnet
+# Description: Automated L1 Help Desk network repair tool
+# ==================================================
+
+# 1. Clear DNS Cache
+Write-Host "Flushing DNS Cache..." -ForegroundColor Yellow
+Clear-DnsClientCache
+
+# 2. Release current IP (APIPA or expired IP)
+Write-Host "Releasing Old IP Address..." -ForegroundColor Yellow
+ipconfig /release
+
+# 3. Request a new IP from DHCP Server
+Write-Host "Renewing IP Address from DHCP..." -ForegroundColor Yellow
+ipconfig /renew
+
+# 4. Verification Test
+Write-Host "Testing Gateway Connection..." -ForegroundColor Green
+Test-Connection -ComputerName 8.8.8.8 -Count 2
